@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ultimate //TODO</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+<link href="main.css" rel="stylesheet">
+<link href="normalize.css" rel="stylesheet">
+<script src="main.js" async></script>
+<script src="hours.js" async></script>
+<!-- sound downloaded from https://www.freesoundslibrary.com/ding-sound-effect/ -->
+<audio id="ding">
+  <source src="Ding-sound-effect.ogg" type="audio/mpeg">
+</audio>
+</head>
+
+<body>
+ <div class="container">
+   <div class="inner">
+    <header>
+      <h1>The Ultimate <br>//TODO List</h1>
+    </header>
+    <main>
+      
+    <!-- little text above the input box -->
+    <p>For people who dunno what to do  ¯\_(ツ)_/¯</p>
+    <input type="text" id="myInput" maxlength="60" size ="60" placeholder="Add a task here">
+    <button id='button1'>Add</button>
+    <!-- the inserted text will go between the unordered list below -->
+    <ul>
+    </ul>
+
+    <!-- this is the list for the day of the week to highlight -->
+    <div id="today">
+      <h3>Today is: </h3>
+      <ul>
+          <li id="mon" class="default">Monday</li>
+          <li id="tue" class="default">Tuesday</li>
+          <li id="wed" class="default">Wednesday</li>
+          <li id="thur" class="default">Thursday</li>
+          <li id="fri" class="default">Friday</li>
+          <li id="sat" class="default">Saturday</li>
+          <li id="sun" class="default">Sunday</li>
+      </ul>
+      <br>
+    </div>
+    </main>
+    <footer>
+      <p> COMP1073 - Winter 2020 - Jad Seaidoun 200340278</p>
+    </footer>
+   </div><!--end inner-->
+  </div><!--end wrapper--> 
+</body>
+</html>
