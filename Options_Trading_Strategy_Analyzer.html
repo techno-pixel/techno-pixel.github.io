@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Options Trading Strategy Analyzer</title>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        input, select {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        .output {
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Options Trading Strategy Analyzer</h1>
+    <table id="optionsTable">
+        <thead>
+            <tr>
+                <th>Strategy Selection</th>
+                <th>Underlying Asset</th>
+                <th>Current Price</th>
+                <th>Option Type</th>
+                <th>Strike Price</th>
+                <th>Expiration Date</th>
+                <th>Implied Volatility</th>
+                <th>Max Profit</th>
+                <th>Max Loss</th>
+                <th>Break-Even Points</th>
+                <th>Risk/Reward Ratio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <select id="strategyDropdown" onchange="updateStrategyFields()">
+                        <option value="">Select Strategy</option>
+                        <option value="long-call">Long Call</option>
+                        <option value="long-put">Long Put</option>
+                        <option value="short-call">Short Call</option>
+                        <option value="short-put">Short Put</option>
+                        <option value="covered-call">Covered Call</option>
+                        <option value="naked-put">Naked Put</option>
+                        <option value="debit-spread">Debit Spread</option>
+                        <option value="credit-spread">Credit Spread</option>
+                        <option value="iron-condor">Iron Condor</option>
+                        <option value="butterfly-spread">Butterfly Spread</option>
+                        <option value="straddle">Straddle</option>
+                        <option value="strangle">Strangle</option>
+                    </select>
+                </td>
+                <td><input type="text" id="underlyingAsset"></td>
+                <td><input type="number" id="currentPrice" step="0.01"></td>
+                <td>
+                    <select id="optionType">
+                        <option value="call">Call</option>
+                        <option value="put">Put</option>
+                    </select>
+                </td>
+                <td><input type="number" id="strikePrice" step="0.01"></td>
+                <td><input type="date" id="expirationDate"></td>
+                <td><input type="number" id="impliedVolatility" step="0.01" min="0" max="100"></td>
+                <td class="output" id="maxProfit">N/A</td>
+                <td class="output" id="maxLoss">N/A</td>
+                <td class="output" id="breakEvenPoints">N/A</td>
+                <td class="output" id="riskRewardRatio">N/A</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+    function updateStrategyFields() {
+        const strategy = document.getElementById('strategyDropdown').value;
+        const fields = {
+            'long-call': {
+                maxProfit: 'Unlimited',
+                maxLoss: 'Premium Paid',
+                breakEven: 'Strike Price + Premium',
+                riskReward: 'Varies'
+            },
+            'long-put': {
+                maxProfit: 'Strike Price - Premium',
+                maxLoss: 'Premium Paid',
+                breakEven: 'Strike Price - Premium',
+                riskReward: 'Defined Risk'
+            },
+            'short-call': {
+                maxProfit: 'Premium Received',
+                maxLoss: 'Unlimited',
+                breakEven: 'Strike Price + Premium',
+                riskReward: 'High Risk'
+            },
+            'short-put': {
+                maxProfit: 'Premium Received',
+                maxLoss: 'Strike Price - Premium',
+                breakEven: 'Strike Price - Premium',
+                riskReward: 'Defined Risk'
+            },
+            'iron-condor': {
+                maxProfit: 'Net Premium Received',
+                maxLoss: 'Width of Spread - Net Premium',
+                breakEven: 'Two Break-Even Points',
+                riskReward: 'Limited Risk/Reward'
+            },
+            // Additional strategies...
+        };
+
+        const currentStrategy = fields[strategy] || {};
+
+        document.getElementById('maxProfit').innerText = currentStrategy.maxProfit || 'N/A';
+        document.getElementById('maxLoss').innerText = currentStrategy.maxLoss || 'N/A';
+        document.getElementById('breakEvenPoints').innerText = currentStrategy.breakEven || 'N/A';
+        document.getElementById('riskRewardRatio').innerText = currentStrategy.riskReward || 'N/A';
+    }
+
+    // Initialize the dropdown
+    updateStrategyFields();
+    </script>
+</body>
+</html>
